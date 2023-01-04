@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'Indie';
-    src: url(../src/fonts/IndieFlower-Regular.ttf);
+    src: url(./fonts/IndieFlower-Regular.ttf);
 }
 
 @font-face {
     font-family: 'MavenPro';
-    src: url(../src/fonts/MavenPro-VariableFont_wght.ttf);
+    src: url(./fonts/MavenPro-VariableFont_wght.ttf);
 }
 
 :root.day {
@@ -15,11 +15,11 @@
     --sidebar-bg-color: #fee2e2;
     --add-task-btn-border-color: #d4d4d4;
     --active-btn-color: #e2cece;
-    --project-btn-img: url('../src/icons/project-light.png');
+    --project-btn-img: url('./icons/project-light.png');
     --content-div-color: #fff1f2;
     --task-div-color: #f1eaea;
     --checkmark-color: rgb(69, 128, 58);
-    --delete-btn-img: url('../src/icons/delete-light.png');
+    --delete-btn-img: url('./icons/delete-light.png');
     --priority-border-color: black;
     --none-priority-color: rgb(99, 98, 98);
     --low-priority-color: green;
@@ -33,11 +33,11 @@
     --sidebar-bg-color: #581c87;
     --add-task-btn-border-color: #d4d4d4;
     --active-btn-color: #7e22ce;
-    --project-btn-img: url('../src/icons/project-dark.png');
+    --project-btn-img: url('./icons/project-dark.png');
     --content-div-color: #7024aa;
     --task-div-color: #9127ee;
     --checkmark-color: rgb(69, 238, 69);
-    --delete-btn-img: url('../src/icons/delete-dark.png');
+    --delete-btn-img: url('./icons/delete-dark.png');
     --priority-border-color: white;
     --none-priority-color:rgb(204, 194, 194);
     --low-priority-color: rgb(68, 216, 68);
@@ -420,7 +420,7 @@ input[type=radio]+label {
 }
 
 .project-delete-btn {
-    background-image: url('../src/icons/delete-dark.png');
+    background-image: url('./icons/delete-dark.png');
     background-color: var(--header-bg-color);
     color: white;
     background-repeat: no-repeat;
