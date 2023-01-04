@@ -1,0 +1,434 @@
+@font-face {
+    font-family: 'Indie';
+    src: url(../src/fonts/IndieFlower-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'MavenPro';
+    src: url(../src/fonts/MavenPro-VariableFont_wght.ttf);
+}
+
+:root.day {
+    --text-color: black;
+    --header-bg-color: #ef4444;
+    --header-text-color: white;
+    --sidebar-bg-color: #fee2e2;
+    --add-task-btn-border-color: #d4d4d4;
+    --active-btn-color: #e2cece;
+    --project-btn-img: url('../src/icons/project-light.png');
+    --content-div-color: #fff1f2;
+    --task-div-color: #f1eaea;
+    --checkmark-color: rgb(69, 128, 58);
+    --delete-btn-img: url('../src/icons/delete-light.png');
+    --priority-border-color: black;
+    --none-priority-color: rgb(99, 98, 98);
+    --low-priority-color: green;
+    --high-priority-color: red;
+}
+
+:root.night {
+    --text-color: white;
+    --header-bg-color: black;
+    --header-text-color: white;
+    --sidebar-bg-color: #581c87;
+    --add-task-btn-border-color: #d4d4d4;
+    --active-btn-color: #7e22ce;
+    --project-btn-img: url('../src/icons/project-dark.png');
+    --content-div-color: #7024aa;
+    --task-div-color: #9127ee;
+    --checkmark-color: rgb(69, 238, 69);
+    --delete-btn-img: url('../src/icons/delete-dark.png');
+    --priority-border-color: white;
+    --none-priority-color:rgb(204, 194, 194);
+    --low-priority-color: rgb(68, 216, 68);
+    --high-priority-color: rgb(241, 80, 80);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: var(--content-div-color);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto; 
+    /* auto allows the rows/columns to be the size they need 
+    and the fr creates a big space because no other fr */
+    font-family: 'MavenPro';
+}
+
+#header {
+    grid-row: 1;
+    grid-column: 1 / 3;
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 2rem;
+    max-height: 4.5rem;
+    font-family: 'Indie';
+}
+
+#header h3 {
+    margin-left: 1.2rem;
+    margin-top: 2.5rem;
+}
+
+#left-header, #right-header {
+    display: flex;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+img[src*='theme-toggle-light'] {
+    transform: rotate(180deg);
+}
+
+#footer {
+    background-color: var(--header-bg-color);
+    color: var(--header-text-color);
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    gap: 0.2rem;
+}
+
+#footer a {
+    margin-top: 0.3rem;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* sidebar styling */
+#sidebar {
+    background-color: var(--sidebar-bg-color);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#sidebar h2 {
+    margin-bottom: 0;
+    color: var(--text-color);
+}
+
+#sidebar-content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 13rem;
+}
+
+#add-task-btn, #add-project-btn {
+    min-height: 2rem;
+    min-width: 15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 1.4rem;
+    background-color: var(--header-bg-color);
+    color: white;
+    border-radius: 0.5rem;
+}
+
+.side-btn, .project-tab-btn {
+    min-height: 2rem;
+    min-width: 15rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 0.5rem;
+    color: var(--text-color);
+}
+
+.project-tab-btn {
+    background-image: var(--project-btn-img);
+    background-repeat: no-repeat;
+    background-position: 3%;
+    display: flex;
+    padding-left: 2.3rem;
+}
+
+.side-btn:hover, #add-project-btn:hover, .project-tab-btn:hover {
+    background-color: var(--active-btn-color);
+}
+
+.active {
+    background-color: var(--active-btn-color);
+    font-weight: bold;
+}
+
+#sidebar h2 {
+    margin-right: 9rem;
+    margin-bottom: 0;
+}
+
+#project-add-div {
+    display: flex;
+    flex-direction: column;
+}
+
+#projects-div {
+    display: flex;
+    flex-direction: column;
+}
+
+/* all tab content shares the same layout */
+#main {
+    background-color: var(--content-div-color);
+}
+
+.tab {
+    padding-left: 4rem;
+    
+}
+
+.content-div {
+    padding-left: 4rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    width: 60rem;
+    gap: 0.5rem;
+}
+
+.content-btn {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    gap: 0.5rem;
+}
+
+.content-btn img {
+    margin-top: -0.1rem;
+}
+
+/* stylings related to forms */
+.overlay {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    z-index: 1100;
+    padding: 2rem;
+    border: 2px solid black;
+    background-color: var(--content-div-color);
+    color: var(--text-color);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.3rem;
+    gap: 0.5rem;
+}
+
+textarea {
+    min-height: 6rem;
+    min-width: 20rem;
+    font-size: 1.3rem;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="date"] {
+    font-size: 1.3rem;
+}
+
+.radio-div {
+    margin-top: -1rem;
+    display: column;
+}
+
+#label-div {
+    margin-top: -1rem;
+    margin-left: -1rem;
+    display: flex;
+    gap: 0rem;
+}
+
+input:hover, label:hover, textarea:hover {
+    cursor: pointer;
+}
+
+input[type=radio] {
+    opacity: 0;
+}
+
+input[type=radio]+label {
+    font-size: 1.2rem;
+    padding: 0.4rem;
+    border: 2px solid var(--priority-border-color);
+}
+
+#none:checked + label {
+    border: 3px solid var(--none-priority-color);
+    color: var(--none-priority-color);
+}
+
+#low:checked + label {
+    border: 3px solid var(--low-priority-color);
+    color: var(--low-priority-color);
+}
+
+#medium:checked + label {
+    border: 3px solid orange;
+    color: orange;
+}
+
+#high:checked + label {
+    border: 3px solid var(--high-priority-color);
+    color: var(--high-priority-color);
+}
+
+#submit-form-btn, #cancel-form-btn, #submit-project-btn, #cancel-project-btn {
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.button-div {
+    padding-top: 1rem;
+    align-self: center;
+    display: flex;
+    gap: 1rem;
+}
+
+#submit-form-btn, #cancel-form-btn {
+    min-width: 8rem;
+    min-height: 2.5rem;
+    font-size: 1.2rem;
+}
+
+#submit-form-btn {
+    background-color: rgb(209, 245, 180);
+}
+
+#cancel-form-btn {
+    background-color:rgb(248, 174, 174)
+}
+
+#add-project-form input {
+    font-size: 1.2rem;
+}
+
+#add-project-form .button-div {
+    margin-top: -1rem;
+}
+
+#submit-project-btn, #cancel-project-btn {
+    font-size: 1.2rem;
+    min-width: 6rem;
+    min-height: 2rem;
+}
+
+#submit-project-btn {
+    background-color: rgb(209, 245, 180);
+}
+
+#cancel-project-btn {
+    background-color:rgb(248, 174, 174);
+}
+
+/* styling for task div display */
+.task-div {
+    background-color: var(--task-div-color);
+    color: var(--text-color);
+    border-left: 3px solid;
+    display: flex;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    justify-content: space-between;
+}
+
+.left-half, .right-half {
+    display: flex;
+    gap: 1rem;
+}
+
+.checkbox {
+    margin-top: 0.1rem;
+    border: 2px solid var(--checkmark-color);
+    border-radius: 0.2rem;
+    width: 1.4rem;
+    height: 1.4rem;
+    font-size: 2rem;
+    color: var(--checkmark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-button {
+    background-image: var(--delete-btn-img);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    min-height: 1.5rem;
+    min-width: 1.5rem;
+}
+
+.header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+}
+
+.project-delete-btn {
+    background-image: url('../src/icons/delete-dark.png');
+    background-color: var(--header-bg-color);
+    color: white;
+    background-repeat: no-repeat;
+    background-position: right;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 2rem;
+    min-width: 11rem;
+    font-size: 1.4rem;
+}
